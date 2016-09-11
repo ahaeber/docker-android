@@ -8,6 +8,7 @@ before_script:
 
 stages:
   - build
+#  - test
   - deploy
 
 build:
@@ -21,6 +22,8 @@ build:
 #    - docker run android-sdk /script/to/run/tests
 
 deploy:
+  stage: deploy
+  script:
     - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD hub.docker.com
     - docker push /andyandy/android:$CI_BUILD_REF_NAME
     - docker push /andyandy/android:latest
