@@ -16,7 +16,6 @@ build:
   tags:
     - docker
   script:
-    - docker build -t registry.example.com/group/project:latest .
     - docker build -t hub.docker.com/andyandy/android .
 
 #test:
@@ -29,5 +28,5 @@ deploy:
     - docker
   script:
     - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD hub.docker.com
-    - docker push /andyandy/android:$CI_BUILD_REF_NAME
-    - docker push /andyandy/android:latest
+    - docker tag andyandy/android:latest andyandy/android:$CI_BUILD_REF_NAME
+    - docker push andyandy/android:$CI_BUILD_REF_NAME 
