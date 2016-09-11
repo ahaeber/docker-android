@@ -4,7 +4,7 @@ services:
   - docker:dind
 
 before_script:
-  - sudo docker info
+  - docker info
 
 stages:
   - build
@@ -16,17 +16,17 @@ build:
   tags:
     - docker
   script:
-    - sudo docker build -t hub.docker.com/andyandy/android .
+    - docker build -t hub.docker.com/andyandy/android .
 
 #test:
 #  script:
-#    - sudo docker run android-sdk /script/to/run/tests
+#    - docker run android-sdk /script/to/run/tests
 
 deploy:
   stage: deploy
   tags:
     - docker
   script:
-    - sudo docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD hub.docker.com
-    - sudo docker tag andyandy/android:latest andyandy/android:$CI_BUILD_REF_NAME
-    - sudo docker push andyandy/android:$CI_BUILD_REF_NAME 
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD hub.docker.com
+    - docker tag andyandy/android:latest andyandy/android:$CI_BUILD_REF_NAME
+    - docker push andyandy/android:$CI_BUILD_REF_NAME 
