@@ -13,7 +13,8 @@ variables:
   IMAGE_BASE_NAME: andyandy/android
   IMAGE_NAME_TAG: $IMAGE_BASE_NAME:$CI_BUILD_REF
   IMAGE_NAME_LATEST_TAG: $IMAGE_BASE_NAME:latest
-  DOCKER_REPOSITORY_URL: docker.io
+  DOCKER_REPOSITORY_URL: https://index.docker.io/v1/
+  DOCKER_REPOSITORY_HOSTNAME: docker.io
 
 # before_script:
 #  - docker info
@@ -28,8 +29,8 @@ build:
     - docker info
     - cat ~/.docker/config.json
     - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
-    - docker tag $IMAGE_NAME_TAG $DOCKER_REPOSITORY_URL/$IMAGE_NAME_TAG
-    - docker push $DOCKER_REPOSITORY_URL/$IMAGE_NAME_TAG
+    - docker tag $IMAGE_NAME_TAG $DOCKER_REPOSITORY_HOSTNAME/$IMAGE_NAME_TAG
+    - docker push $DOCKER_REPOSITORY_HOSTNAME/$IMAGE_NAME_TAG
     - docker logout
 
 #test:
