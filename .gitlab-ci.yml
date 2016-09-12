@@ -3,20 +3,27 @@ image: docker:latest
 services:
   - docker:dind
 
-before_script:
-  - docker info
-
 stages:
   - build
 #  - test
   - deploy
+#  - clean
 
+variables:
+  - IMAGE_BASE_NAME: andyandy/android
+  - IMAGE_NAME_TAG: $IMAGE_BASE_NAME:$CI_BUILD_REF
+  - IMAGE_NAME_LATEST_TAG: $IMAGE_BASE_NAME:latest
+  - DOCKER_REPOSITORY_URL: hub.docker.com
+
+# before_script:
+#  - docker info
+  
 build:
   stage: build
   tags:
     - docker
   script:
-    - docker build -t hub.docker.com/andyandy/android .
+    - docker build -t $IMAGE_NAME_TAG .
 
 #test:
 #  script:
@@ -27,6 +34,15 @@ deploy:
   tags:
     - docker
   script:
-    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD hub.docker.com
-    - docker tag andyandy/android:latest andyandy/android:$CI_BUILD_REF_NAME
-    - docker push andyandy/android:$CI_BUILD_REF_NAME 
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD $DOCKER_REPOSITORY_URL
+    - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
+    - docker push $IMAGE_NAME_TAG
+    - docker logout
+
+# clean_docker:
+#  stage: clean
+#  when: always
+#  script:
+#    - $COMPOSE stop
+#    - $COMPOSE down
+#    - $COMPOSE rm -f
