@@ -16,9 +16,6 @@ variables:
   DOCKER_REPOSITORY_URL: https://index.docker.io/v1/
   DOCKER_REPOSITORY_HOSTNAME: docker.io
 
-# before_script:
-#  - docker info
-  
 build:
   stage: build
   tags:
@@ -26,7 +23,6 @@ build:
   script:
     - docker build -t $IMAGE_NAME_TAG .
     - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD $DOCKER_REPOSITORY_URL
-    - docker info
     - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
     - docker tag $IMAGE_NAME_TAG $DOCKER_REPOSITORY_HOSTNAME/$IMAGE_NAME_TAG
     - docker push $DOCKER_REPOSITORY_HOSTNAME/$IMAGE_NAME_TAG
