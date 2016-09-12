@@ -1,13 +1,12 @@
-FROM alpine:3.3
-#FROM snowdream/gradle:2.14.1
+FROM snowdream/gradle:2.14.1
 
 MAINTAINER Andreas Häber <andreas.haber@intele.com>
 
 # Install dependencies
-#RUN dpkg --add-architecture i386 && \
-#    apt-get -qq update && \
-#    apt-get -qqy install libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 tar git --no-install-recommends && \
-#    rm -rf /var/lib/apt/lists/*
+RUN dpkg --add-architecture i386 && \
+    apt-get -qq update && \
+    apt-get -qqy install libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 tar git --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 # Download and untar Android SDK
 #ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
