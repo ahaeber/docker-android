@@ -6,7 +6,7 @@ services:
 stages:
   - build
 #  - test
-  - deploy
+#  - deploy
 #  - clean
 
 variables:
@@ -24,20 +24,24 @@ build:
     - docker
   script:
     - docker build -t $IMAGE_NAME_TAG .
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD $DOCKER_REPOSITORY_URL
+    - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
+    - docker push $IMAGE_NAME_TAG
+    - docker logout
 
 #test:
 #  script:
 #    - docker run android-sdk /script/to/run/tests
 
-deploy:
-  stage: deploy
-  tags:
-    - docker
-  script:
-    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD $DOCKER_REPOSITORY_URL
-    - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
-    - docker push $IMAGE_NAME_TAG
-    - docker logout
+#deploy:
+#  stage: deploy
+#  tags:
+#    - docker
+#  script:
+#    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD $DOCKER_REPOSITORY_URL
+#    - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
+#    - docker push $IMAGE_NAME_TAG
+#    - docker logout
 
 # clean_docker:
 #  stage: clean
