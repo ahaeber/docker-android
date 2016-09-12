@@ -26,6 +26,7 @@ build:
     - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
     - docker tag $IMAGE_NAME_TAG $DOCKER_REPOSITORY_HOSTNAME/$IMAGE_NAME_TAG
     - docker push $DOCKER_REPOSITORY_HOSTNAME/$IMAGE_NAME_TAG
+    - docker push $DOCKER_REPOSITORY_HOSTNAME/$IMAGE_NAME_LATEST_TAG
     - docker logout
 
 #test:
