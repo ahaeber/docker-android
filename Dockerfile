@@ -1,6 +1,5 @@
 FROM snowdream/gradle:2.14.1
 
-#MAINTAINER snowdream <yanghui1986527@gmail.com>
 MAINTAINER Andreas Häber <andreas.haber@intele.com>
 
 # Install dependencies
@@ -21,6 +20,6 @@ ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 ENV ANDROID_COMPONENTS platform-tools,build-tools-24.0.0,build-tools-24.0.1,build-tools-24.0.2,build-tools-23.0.3,android-24,android-23
 ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository
 
-RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ; \
-    echo y | android update sdk --no-ui --all --filter "${GOOGLE_COMPONENTS}"
+#RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ; \
+#    echo y | android update sdk --no-ui --all --filter "${GOOGLE_COMPONENTS}"
 
