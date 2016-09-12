@@ -25,6 +25,7 @@ build:
   script:
     - docker build -t $IMAGE_NAME_TAG .
     - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD --email $DOCKER_HUB_EMAIL $DOCKER_REPOSITORY_URL
+    - docker info
     - docker tag $IMAGE_NAME_TAG $IMAGE_NAME_LATEST_TAG
     - docker push $IMAGE_NAME_TAG
     - docker logout
