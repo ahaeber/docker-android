@@ -13,7 +13,7 @@ variables:
   IMAGE_BASE_NAME: andyandy/android
   IMAGE_NAME_TAG: $IMAGE_BASE_NAME:$CI_BUILD_REF
   IMAGE_NAME_LATEST_TAG: $IMAGE_BASE_NAME:latest
-  DOCKER_REPOSITORY_URL: hub.docker.com
+  DOCKER_REPOSITORY_URL: docker.io
 
 # before_script:
 #  - docker info
